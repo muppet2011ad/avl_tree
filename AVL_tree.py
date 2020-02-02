@@ -350,9 +350,9 @@ class Node:
             zl = 0
             zr = 0
             if z.left:
-                zl =z.left.count_levels()
+                zl =z.left.get_height()
             if z.right:
-                zr = z.right.count_levels()
+                zr = z.right.get_height()
             if zl>zr:
                 y = z.left
             else:

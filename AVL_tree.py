@@ -303,7 +303,15 @@ class Node:
         Should run on the node and return the height of the node.
         :return integer:
         '''
-        ...
+        if self.left == None:
+            left_height = 0
+        else:
+            left_height = self.left.get_height()
+        if self.right == None:
+            right_height = 0
+        else:
+            right_height = self.right.get_height()
+        return 1 + max((left_height,right_height))
 
     def unbalanced(self):
         '''
@@ -311,7 +319,15 @@ class Node:
         the subtree rooted at this node is balanced.
         :return boolean:
         '''
-        ...
+        if self.left == None:
+            left_height = 0
+        else:
+            left_height = self.left.get_height()
+        if self.right == None:
+            right_height = 0
+        else:
+            right_height = self.right.get_height()
+        return abs(left_height-right_height) > 1
 
     def rebalance_insert(self):
         x = self
@@ -326,18 +342,16 @@ class Node:
         if z.unbalanced():
             if z.left == y:
                 if y.left == x:
-                    # ll case
-                    ...
+                    z.rotate_right()
                 else:
-                    # lr case
-                    ...
+                    y.rotate_left()
+                    z.rotate_right()
             else:
                 if y.right == x:
-                    # rr case
-                    ...
+                    z.rotate_left()
                 else:
-                    # rl case
-                    ...
+                    y.rotate_right()
+                    z.rotate_left()
             pass
         #else done
 
@@ -370,18 +384,16 @@ class Node:
 
             if z.left == y:
                 if y.left == x:
-                    # ll case
-                    ...
+                    z.rotate_right()
                 else:
-                    # lr case
-                    ...
+                    y.rotate_left()
+                    z.rotate_right()
             else:
                 if y.right == x:
-                    # rr case
-                    ...
+                    z.rotate_left()
                 else:
-                    # rl case
-                    ...
+                    y.rotate_right()
+                    z.rotate_left()
             pass
         #else done
 

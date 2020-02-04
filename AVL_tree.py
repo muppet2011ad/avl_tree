@@ -93,6 +93,10 @@ class Node:
                     self.right.parent = self
                 self.data = n.data
                 self.parent = self.parent
+            path = self.parent
+            while path != None:
+                path.rebalance_delete()
+                path = path.parent
         else:
             # if node has 2 children
             # find its successor
@@ -112,6 +116,10 @@ class Node:
                 parent.right = successor.right
                 if parent.right:
                     parent.right.parent = parent
+            path = successor.parent
+            while path != None:
+                path.rebalance_delete()
+                path = path.parent
 
     def children_count(self):
         """
@@ -211,12 +219,14 @@ class Node:
                 if self.left is None:
                     self.left = Node(data)
                     self.left.parent = self
+                    self.left.rebalance_insert()
                 else:
                     self.left.insert(data)
             elif data > self.data:
                 if self.right is None:
                     self.right = Node(data)
                     self.right.parent = self
+                    self.right.rebalance_insert()
                 else:
                     self.right.insert(data)
         else:
